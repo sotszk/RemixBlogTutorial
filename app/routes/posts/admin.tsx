@@ -1,7 +1,7 @@
-import { json } from "@remix-run/node";
-import { Link, Outlet, useLoaderData, useTransition } from "@remix-run/react";
+import { getPosts } from '~/models/post.server';
 
-import { getPosts } from "~/models/post.server";
+import { json } from '@remix-run/node';
+import { Link, Outlet, useLoaderData } from '@remix-run/react';
 
 export const loader = async () => {
   return json({ posts: await getPosts() });
@@ -9,7 +9,6 @@ export const loader = async () => {
 
 export default function PostAdmin() {
   const { posts } = useLoaderData<typeof loader>();
-  const transition = useTransition();
 
   return (
     <div className="mx-auto max-w-4xl">
