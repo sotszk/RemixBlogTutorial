@@ -1,5 +1,6 @@
-import { useMatches } from "@remix-run/react";
-import { useMemo } from "react";
+import { useMemo } from 'react';
+
+import { useMatches } from '@remix-run/react';
 
 import type { User } from "~/models/user.server";
 
@@ -64,6 +65,13 @@ export function useUser(): User {
     );
   }
   return maybeUser;
+}
+
+export function useOptionalAdminUser() {
+  const user = useOptionalUser();
+  if (!user) return undefined;
+  if (user.email !== ENV.ADMIN_EMAIL) return undefined;
+  return user;
 }
 
 export function validateEmail(email: unknown): email is string {
